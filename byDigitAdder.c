@@ -39,7 +39,7 @@ void obtainPostiveInt(char *numberCPtr,
     char x;
     while (1)
     {
-        printf("Please enter %s integer:", descriptionCPtr);
+        printf("Please enter %s integer: ", descriptionCPtr);
         for (int i = 0;; i++)
         {
             x = getchar();
@@ -89,11 +89,49 @@ struct DigitNode *numberList(const char *numberCPtr)
 //  PURPOSE:  To build and return a linked list IN LITTLE ENDIAN ORDER
 //	of the decimal number that results from adding the decimal numbers
 //	whose digits are pointed to by 'list0' and 'list1'.
-struct DigitNode *
-add(const struct DigitNode *list0,
-    const struct DigitNode *list1)
+struct DigitNode *add(const struct DigitNode *list0, const struct DigitNode *list1)
 {
     //  YOUR CODE HERE
+    int carry = 0, sum;
+    struct DigitNode *head = (struct DigitNode *)malloc(sizeof(struct DigitNode)), *tail = head;
+
+    while ((list0 != NULL) && (list1 != NULL))
+    {
+        sum = (carry + list0->digit_ + list1->digit_);
+        carry = sum / 10;
+        struct DigitNode *x = (struct DigitNode *)malloc(sizeof(struct DigitNode));
+        x->digit_ = sum % 10;
+        x->nextPtr_ = NULL;
+        tail->nextPtr_ = x;
+        tail = x;
+        list0 = list0->nextPtr_;
+        list1 = list1->nextPtr_;
+    }
+    if (list0 == NULL)
+        list0 = list1;
+
+    while (list0 != NULL)
+    {
+        sum = (carry + list0->digit_);
+        carry = sum / 10;
+        struct DigitNode *x = (struct DigitNode *)malloc(sizeof(struct DigitNode));
+        x->digit_ = sum % 10;
+        x->nextPtr_ = NULL;
+        tail->nextPtr_ = x;
+        tail = x;
+        list0 = list0->nextPtr_;
+    }
+    if (carry > 0)
+    {
+        struct DigitNode *x = (struct DigitNode *)malloc(sizeof(struct DigitNode));
+        x->digit_ = carry;
+        x->nextPtr_ = NULL;
+        tail->nextPtr_ = x;
+        tail = x;
+    }
+    tail = head->nextPtr_;
+    free(head);
+    return tail;
 }
 
 //  PURPOSE:  To print the decimal number whose digits are pointed to by 'list'.
@@ -101,12 +139,24 @@ add(const struct DigitNode *list0,
 void printList(const struct DigitNode *list)
 {
     //  YOUR CODE HERE
+    if(list == NULL)
+    return;
+    printList(list->nextPtr_);
+    printf("%d",list->digit_);
 }
 
 //  PURPOSE:  To print the nodes of 'list'.  No return value.
 void freeList(struct DigitNode *list)
 {
     //  YOUR CODE HERE
+    struct DigitNode *x = list;
+    while (list != NULL)
+    {
+        x = list;
+        list = list->nextPtr_;
+        free(x);
+    }
+    return;
 }
 
 //  PURPOSE:  To coordinate the running of the program.  Ignores command line
