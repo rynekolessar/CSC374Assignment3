@@ -34,7 +34,7 @@ void obtainPostiveInt(char *numberCPtr,
                       int numberTextLen,
                       const char *descriptionCPtr)
 {
-    int len, fl;
+    int len, flag;
     char x;
     while (1)
     {
@@ -50,14 +50,14 @@ void obtainPostiveInt(char *numberCPtr,
             numberCPtr[i] = x;
         }
         len = strlen(numberCPtr);
-        fl = 0;
+        flag = 0;
         for (int i = 0; i < len; i++)
             if (numberCPtr[i] < '0' || numberCPtr[i] > '9')
             {
-                fl = 1;
+                flag = 1;
                 break;
             }
-        if (!fl)
+        if (!flag)
             break;
     }
 }
@@ -89,7 +89,8 @@ struct DigitNode *numberList(const char *numberCPtr)
 //	whose digits are pointed to by 'list0' and 'list1'.
 struct DigitNode *add(const struct DigitNode *list0, const struct DigitNode *list1)
 {
-    int carry = 0, sum;
+    int carry = 0; 
+    int sum;
     struct DigitNode *head = (struct DigitNode *)malloc(sizeof(struct DigitNode)), *tail = head;
 
     while ((list0 != NULL) && (list1 != NULL))
