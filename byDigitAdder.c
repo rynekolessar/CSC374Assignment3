@@ -34,7 +34,6 @@ void obtainPostiveInt(char *numberCPtr,
                       int numberTextLen,
                       const char *descriptionCPtr)
 {
-    //  YOUR CODE HERE
     int len, fl;
     char x;
     while (1)
@@ -69,7 +68,6 @@ void obtainPostiveInt(char *numberCPtr,
 //	returned is 'digit_=3' -> 'digit_=2' -> 'digit_=1' -> NULL.
 struct DigitNode *numberList(const char *numberCPtr)
 {
-    //  YOUR CODE HERE
     int len = strlen(numberCPtr);
     struct DigitNode *head = (struct DigitNode *)malloc(sizeof(struct DigitNode)), *tail = head;
 
@@ -91,7 +89,6 @@ struct DigitNode *numberList(const char *numberCPtr)
 //	whose digits are pointed to by 'list0' and 'list1'.
 struct DigitNode *add(const struct DigitNode *list0, const struct DigitNode *list1)
 {
-    //  YOUR CODE HERE
     int carry = 0, sum;
     struct DigitNode *head = (struct DigitNode *)malloc(sizeof(struct DigitNode)), *tail = head;
 
@@ -138,9 +135,9 @@ struct DigitNode *add(const struct DigitNode *list0, const struct DigitNode *lis
 //	Note that the digits are IN LITTLE ENDIAN ORDER.  No return value.
 void printList(const struct DigitNode *list)
 {
-    //  YOUR CODE HERE
-    if(list == NULL)
-    return;
+    if(list == NULL) {
+        return;
+    }
     printList(list->nextPtr_);
     printf("%d",list->digit_);
 }
@@ -148,7 +145,6 @@ void printList(const struct DigitNode *list)
 //  PURPOSE:  To print the nodes of 'list'.  No return value.
 void freeList(struct DigitNode *list)
 {
-    //  YOUR CODE HERE
     struct DigitNode *x = list;
     while (list != NULL)
     {
@@ -156,7 +152,6 @@ void freeList(struct DigitNode *list)
         list = list->nextPtr_;
         free(x);
     }
-    return;
 }
 
 //  PURPOSE:  To coordinate the running of the program.  Ignores command line
