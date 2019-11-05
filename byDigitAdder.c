@@ -30,9 +30,7 @@ struct DigitNode
 //	of length 'numberTextLen'.  'descriptionCPtr' is printed because it
 //	tells the user the integer that is expected.   Ending '\n' from
 //	'fgets()' is replaced with '\0'.  No return value.
-void obtainPostiveInt(char *numberCPtr,
-                      int numberTextLen,
-                      const char *descriptionCPtr)
+void obtainPostiveInt(char *numberCPtr,int numberTextLen,const char *descriptionCPtr)
 {
     int len, flag;
     char x;
